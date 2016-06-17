@@ -1,53 +1,52 @@
-//加载最新文章
-//#[image name][title][author][time][descript][tags][click]
-/*
-<div class="news-list">
-	<div class="news-img col-xs-5 col-sm-5 col-md-4"> <a target="_blank" href=""><img src="images/logo.jpg" alt=""> </a> </div>
-	<div class="news-info col-xs-7 col-sm-7 col-md-8">
-	  <dl>
-		<dt> <a href="" target="_blank"> 最新文章标题 </a> </dt>
-		<dd><span class="name"><a href="" title="由 huachao 发布" rel="author">作者</a></span> <span class="identity"></span> <span class="time"> 2015-10-19 </span></dd>
-		<dd class="text">简单摘要</dd>
-	  </dl>
-	  <div class="news_bot col-sm-7 col-md-8"> <span class="tags visible-lg visible-md"> <a href="">标签</a> <a href="">分类</a> </span> <span class="look"> 点击量：<strong>2126</strong>  </div>
-    </div>
-</div>
+Bmob.initialize("8bc5db9ed64cdb73292da07fb398e1a3", "2c505b1c4eaa965560bd433c9ae1639c");
 
-*/
-function parseNewestArticle(articlesList){
-	var items=articlesList.split("\n");
+function queryArticle(pageNo){ 
+	var article = Bmob.Object.extend("article");
+	var query = new Bmob.Query(article);
+	query.limit(10);
+	var oneItem=$("#HCAricleModel").html();
 	var html="";
-	for(var i=0;i<items.length;i++){
-		var item=items[i];
-		
-		if(item.startsWith("#")){
-			continue;
+	// 查询所有数据
+	query.find({
+		success: function(results) {
+			 
+			// 循环处理查询到的数据
+			for (var i = 0; i < results.length; i++) {
+				var object = results[i];
+				var title=object.get('title');
+				var imgUrl=object.get("picUrl");
+				var descript=object.get("descript");
+				var categoryId=object.get("categoryId");
+				var authorUrl=object.get("authorUrl");
+				if(!authorUrl){
+					authorUrl="";
+				}
+				var authorName=object.get("authorName");
+				var tmpItem=oneItem.replace("${arcitleId}",object.id).replace("${title}",title).replace("${imgUrl}",imgUrl).replace("${descript}",descript).replace("${dateTime}",object.createdAt);
+				tmpItem=tmpItem.replace("${category}",_CATEGORY_ID_[categoryId]).replace("${clickCount}",0).replace("${authorName}",authorName).replace("${authorUrl}",authorUrl);
+				html+=tmpItem;
+				console.log(oneItem);
+			}
+			$("#hcNewList").html(html);
+		},
+		error: function(error) {
+			alert("failure: " + error.code + " " + error.message);
 		}
-		var datas=item.split(" ");
-		html=html+"<div class=\"news-list\"> <div class=\"news-img col-xs-5 col-sm-5 col-md-4\"> <a target=\"_blank\" href=\"\"><img src=\"images/";
-		
-		var imageName=datas[0];
-		var title=datas[1];
-		var author=datas[2];
-		var time=datas[3];
-		var descript=datas[4];
-		var tags=datas[5];
-		var click=datas[6];
-		console.log("imageName:"+imageName);
-		console.log("title:"+title);
-		console.log("author:"+author);
-		console.log("time:"+time);
-		console.log("descript:"+descript);
-		console.log("tags:"+tags);
-		console.log("click:"+click);
-		html=html+imageName+"\" alt=\"\"> </a> </div><div class=\"news-info col-xs-7 col-sm-7 col-md-8\"> <dl>";
-		html=html+"<dt> <a href=\"\" target=\"_blank\"> "+title +"</a> </dt>"
-		html=html+"<dd><span class=\"name\"><a href=\"\" title=\""+author+"\" rel=\"author\">"+author+"</a></span> <span class=\"identity\"></span> <span class=\"time\"> "+time+" </span></dd>";
-		html=html+"<dd class=\"text\">"+descript+"</dd> </dl>";
-		
-		html=html+"<div class=\"news_bot col-sm-7 col-md-8\"> <span class=\"tags visible-lg visible-md\"> <a href=\"\">"+tags+"</a><a href=\"\">test</a>  </span> <span class=\"look\"> clicks:<strong>"+click+"</strong>  </div></div></div>";
-		
-		console.log(item);
-	}
-	return html;
+	});
 }
+
+function queryArticleById(articleId){
+	var Article = Bmob.Object.extend("article");
+	var query = new Bmob.Query(Article);
+	query.get(articleId, {
+	success: function(article) { 
+	$("#articleTitle").html(article.get("title"));
+	$("#articleContent").html(article.get("content"));
+	
+  },
+  error: function(object, error) {
+    // 查询失败
+	alert("sorry!");
+  }
+});
+} 

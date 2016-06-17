@@ -36,7 +36,7 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
       <h1 class="logo"> <a href="http://huachao1001.github.io/" title="华超的技术博客"></a> </h1>
       <ul class="nav hidden-xs-nav">
         <li class="active"><a href="index.html"><image style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:10px " src="images/home_logo.png"/>主页</a></li> 
-        <li><a href="index.html?" ><image style="width:25px;height:25px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/java_logo.png"/>Java基础</a></li>
+        <li><a href="index.html" ><image style="width:25px;height:25px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/java_logo.png"/>Java基础</a></li>
         <li><a href="index.html"><image style="width:25px;height:25px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/android_logo.png"/>Android相关</a></li>
         <li><a href="index.html"><image style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/data_structure_logo.png"/>数据结构</a></li>
         <li><a href="index.html"><image style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/operate_logo.png"/>操作系统</a></li>
@@ -80,42 +80,17 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
           <li class="" data-target="#carousel-example-generic" data-slide-to="1"></li>
           <li class="" data-target="#carousel-example-generic" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner" role="listbox">
-          <div class="item active"> <a href="http://huachao1001.github.io" target="_blank"><img src="images/img1.jpg" alt=""></a>
-            <div class="carousel-caption"> 这里是滚动图片 </div>
-            <span class="carousel-bg"></span> </div>
-          <div class="item"> <a href="http://huachao1001.github.io" target="_blank"><img src="images/img2.jpg" alt=""></a>
-            <div class="carousel-caption">  这里是滚动图片 </div>
-            <span class="carousel-bg"></span> </div>
-          <div class="item"> <a href="http://huachao1001.github.io" target="_blank"><img src="images/img3.jpg" alt=""></a>
-            <div class="carousel-caption">  这里是滚动图片 </div>
-            <span class="carousel-bg"></span> </div>
-        </div>
+        
         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
       <!--/banner-->
     
       <div class="content-block new-content">
-        <h2 class="title"><strong>最新文章</strong></h2>
-        <div id="hcNewList" class="row">
-		 <!-- 替换如下模板-->
-			<div id="HCAricleModel" style="display:none">
-			  <div class="news-list">
-				<div class="news-img col-xs-5 col-sm-5 col-md-4"> <a target="_blank" href=""><img src="${imgUrl}" alt=""> </a> </div>
-				<div class="news-info col-xs-7 col-sm-7 col-md-8">
-				  <dl>
-					<dt> <a href="article.html?${arcitleId}" target="_blank"> ${title} </a> </dt>
-					<dd><span class="name"><a href="${authorUrl}"   rel="author">${authorName}</a></span> <span class="identity"></span> <span class="time"> ${dateTime} </span></dd>
-					<dd class="text">${descript}</dd>
-				  </dl>
-				  <div class="news_bot col-sm-7 col-md-8"> <span class="tags visible-lg visible-md">  <a href="">${category}</a> </span> <span class="look"> 点击量：<strong>${clickCount}</strong>  </div>
-				</div>
-			  </div> 
-			</div>
+        <h2 class="title"><strong id="articleTitle"></strong></h2>
+        <div id="articleContent"> 
         </div>
         <!--<div class="news-more" id="pagination">
         	<a href="">查看更多</a>
-        </div>-->
-        <div class="quotes" style="margin-top:15px"><span class="disabled">首页</span><span class="disabled">上一页</span><span class="current">1</span><a href="">2</a><a href="">下一页</a><a href="">尾页</a></div>
+        </div>--> 
       </div>
     </div>
   </div>
@@ -169,13 +144,15 @@ $(function(){
 	$(".gotop").click(function(){
 		$('html,body').animate({'scrollTop':0},500);
 	});
-	//今天时间
 	 
-	//替换最新文章
-	//htmlobj=$.ajax({url:"config/new-articles.conf",async:false});
-	//var html=parseNewestArticle(htmlobj.responseText);
-	//$("#hcNewList").html(html);
-queryArticle(1);
+	 var curUrlSp=window.location.href.split("?"); 
+	 if(curUrlSp&&curUrlSp.length>1){
+		var articleId=curUrlSp[1];
+		queryArticleById(articleId);
+	 }
+	
+	
+ 
 
      //
 	 
