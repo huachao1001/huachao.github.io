@@ -3,7 +3,9 @@ Bmob.initialize("8bc5db9ed64cdb73292da07fb398e1a3", "2c505b1c4eaa965560bd433c9ae
 function queryArticle(curCategoryId,curPageNo){ 
 	var article = Bmob.Object.extend("article");
 	var query = new Bmob.Query(article);
-	
+	if(curCategoryId!=0){
+		query.equalTo("categoryId", curCategoryId);
+	}
 	query.limit(pageCount);
 	query.skip(pageCount*(curPageNo-1));
 	var oneItem=$("#HCAricleModel").html();
@@ -26,6 +28,7 @@ function queryArticle(curCategoryId,curPageNo){
 				var authorName=object.get("authorName");
 				var tmpItem=oneItem.replace("${arcitleId}",object.id).replace("${title}",title).replace("${imgUrl}",imgUrl).replace("${descript}",descript).replace("${dateTime}",object.createdAt);
 				tmpItem=tmpItem.replace("${category}",_CATEGORY_ID_[categoryId]).replace("${clickCount}",0).replace("${authorName}",authorName).replace("${authorUrl}",authorUrl);
+				tmpItem=tmpItem.replace("${c}",categoryId);
 				html+=tmpItem; 
 			}
 			$("#hcNewList").html(html);
