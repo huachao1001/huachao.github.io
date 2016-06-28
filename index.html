@@ -25,7 +25,8 @@ window.onload = function() {
 		window.location.href="ie.html";
 	}
 }
-var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网络","数据库"];
+var pageCount=10;
+var _CATEGORY_ID_=["最新文章","Java基础","Android相关","数据结构","操作系统","计算机网络","数据库"];
 </script>
 </head>
 
@@ -63,13 +64,7 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
 			<li><a href="index.html"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/database_logo.png"/>数据库</a></li>
         
 	   </ul>
-        <form class="navbar-form" action="search.php" method="post" style="padding:0 25px;">
-          <div class="input-group">
-            <input class="form-control" placeholder="请输入关键字" type="text">
-            <span class="input-group-btn">
-            <button class="btn btn-default btn-search" type="submit">搜索</button>
-            </span> </div>
-        </form>
+        
       </div>
     </div>
   </header>
@@ -97,7 +92,7 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
       <!--/banner-->
     
       <div class="content-block new-content">
-        <h2 class="title"><strong>最新文章</strong></h2>
+        <h2 class="title"><strong id="articleCategory">最新文章</strong></h2>
         <div id="hcNewList" class="row">
 		 <!-- 替换如下模板-->
 			<div id="HCAricleModel" style="display:none">
@@ -117,8 +112,13 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
         <!--<div class="news-more" id="pagination">
         	<a href="">查看更多</a>
         </div>-->
+		
+		<div class="quotes" id="HCPage" style="margin-top:15px">
+		</div>
+		<!--页码
         <div class="quotes" style="margin-top:15px"><span class="disabled">首页</span><span class="disabled">上一页</span><span class="current">1</span><a href="">2</a><a href="">下一页</a><a href="">尾页</a></div>
-      </div>
+		-->
+	  </div>
     </div>
   </div>
   <!--/内容-->
@@ -171,14 +171,25 @@ $(function(){
 	$(".gotop").click(function(){
 		$('html,body').animate({'scrollTop':0},500);
 	});
-	//今天时间
-	 
-	//替换最新文章
-	//htmlobj=$.ajax({url:"config/new-articles.conf",async:false});
-	//var html=parseNewestArticle(htmlobj.responseText);
-	//$("#hcNewList").html(html);
-queryArticle(1);
-
+	var curUrlSp=window.location.href.split("?"); 
+	var curPageNo=1;
+	var curCategoryId=0;
+	if(curUrlSp&&curUrlSp.length>1){
+		var queryData=curUrlSp[1];
+		var dataArray=queryData.split("&");
+		for(var i=0;i<dataArray.length;i++){
+			var one=dataArray[i]; 
+			var kv=one.split("=");
+			if(kv[0]==("c")){
+				curCategoryId=kv[1];
+			}else if(kv[0]==("pn")){
+				curPageNo=kv[1];
+			}
+		}
+	} 
+	$("#articleCategory").html(_CATEGORY_ID_[curCategoryId]);
+	queryArticle(curCategoryId,curPageNo);
+	genPageBar(curPageNo,curCategoryId);
      //
 	 
 	//console.log(html);
