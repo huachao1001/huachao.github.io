@@ -1,5 +1,49 @@
 Bmob.initialize("8bc5db9ed64cdb73292da07fb398e1a3", "2c505b1c4eaa965560bd433c9ae1639c");
-
+function addClickCount(articleId){
+	var ClickCount = Bmob.Object.extend("ClickCount");
+	var query = new Bmob.Query(ClickCount);
+	query.equalTo("articleId", articleId);
+	query.find({
+		success: function(results) { 
+			for (var i = 0; i < results.length; i++) {
+				var object = results[i];
+				 var clickCount=object.get("clickCount");
+				 object.set("clickCount",(parseInt(clickCount)+1)+"");
+				 object.save( ); 
+			}
+			 
+		},
+		error: function(error) {
+			 
+		}
+	});
+	
+}
+function updateClickCountByArtId(articleId){
+	var ClickCount = Bmob.Object.extend("ClickCount");
+	var query = new Bmob.Query(ClickCount);
+	query.equalTo("articleId", articleId);
+	query.find({
+		success: function(results) { 
+			for (var i = 0; i < results.length; i++) {
+				var object = results[i];
+				var clickCount=object.get("clickCount");
+				console.log("click Count:"+clickCount);
+				$("#click"+articleId).html(clickCount);
+			}
+			 
+		},
+		error: function(error) {
+			 
+		}
+	}); 
+}
+var articleIds=[];
+function updateClicks(){
+	for(var i=0;i<articleIds.length;i++){
+		updateClickCountByArtId(articleIds[i]);
+	}
+}
 function queryArticle(curCategoryId,curPageNo){ 
 	var article = Bmob.Object.extend("article");
 	var query = new Bmob.Query(article);
@@ -28,33 +72,54 @@ function queryArticle(curCategoryId,curPageNo){
 				if(!imgUrl){
 					imgUrl=genImg(title);
 				} 
+				  
+				
 				var authorName=object.get("authorName");
 				var tmpItem=oneItem.replace("${arcitleId}",object.id).replace("${title}",title).replace("${imgUrl}",imgUrl).replace("${descript}",descript).replace("${dateTime}",object.createdAt);
-				tmpItem=tmpItem.replace("${category}",_CATEGORY_ID_[categoryId]).replace("${clickCount}",0).replace("${authorName}",authorName).replace("${authorUrl}",authorUrl);
-				tmpItem=tmpItem.replace("${c}",categoryId);
+				tmpItem=tmpItem.replace("${category}",_CATEGORY_ID_[categoryId]).replace("${authorName}",authorName).replace("${authorUrl}",authorUrl);
+				tmpItem=tmpItem.replace("${c}",categoryId).replace("${clickId}","click"+object.id);
+				articleIds.push(object.id);
 				html+=tmpItem; 
 			}
 			$("#hcNewList").html(html);
+			updateClicks();
 		},
 		error: function(error) {
 			alert("failure: " + error.code + " " + error.message);
 		}
 	});
 }
-
+function updateDetailClickCount(articleId){
+	var ClickCount = Bmob.Object.extend("ClickCount");
+	var query = new Bmob.Query(ClickCount);
+	query.equalTo("articleId", articleId);
+	query.find({
+		success: function(results) { 
+			for (var i = 0; i < results.length; i++) {
+				var object = results[i];
+				var clickCount=object.get("clickCount");  
+				updateProxyClick(clickCount);
+			}
+			 
+		},
+		error: function(error) {
+			 
+		}
+	}); 
+}
 function queryArticleById(articleId){
 	
 	var Article = Bmob.Object.extend("article");
 	var query = new Bmob.Query(Article);
 	query.get(articleId, {
-	success: function(article) { 
-	$("#articleTitle").html(article.get("title"));
-	var hcArticleMarked=HCMarkDown(article.get("content"));
-	changeIframeHtml(hcArticleMarked);
-	//$("#articleContent").html());
-	
-  },
-  error: function(object, error) {
+		success: function(article) { 
+			$("#articleTitle").html(article.get("title"));
+			var hcArticleMarked=HCMarkDown(article.get("content"));
+			changeIframeHtml(hcArticleMarked);
+			updateDetailCrtTime(article.createdAt);
+			updateDetailClickCount(articleId);
+			addClickCount(articleId);
+		},error: function(object, error) {
     // ²éÑ¯Ê§°Ü
 	alert("sorry!");
   }

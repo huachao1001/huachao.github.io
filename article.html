@@ -82,7 +82,7 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
       <!--/banner-->
     
       <div class="content-block new-content">
-        <h1 class="title"><strong id="articleTitle"></strong></h1>
+        <h1 class="title" style="text-align:center"><strong id="articleTitle" ></strong></h1>
         <div id="articleContent"> 
         </div>
         <!--<div class="news-more" id="pagination">
@@ -137,7 +137,7 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
 <script src="js/load-html.js" type="text/javascript" ></script> 
 <script type="text/javascript"> 
 var hcContentHeight=0; 
-var extraHeight=50;
+var extraHeight=80;
 function changeIframeHtml(hcArticleMarked){
 	var codeLineCount=0;
 	$(hcArticleMarked).find("code").each(function(){
@@ -147,6 +147,12 @@ function changeIframeHtml(hcArticleMarked){
 	$("#hcIframe").contents().find("#hcContentDiv").html(hcArticleMarked);
 	
 	 changeIframeHeight() 
+}
+function updateDetailCrtTime(createAt ){
+	 $("#hcIframe").contents().find("#proxyCreateAt").html(createAt); 
+}
+function updateProxyClick(clickCount ){
+	 $("#hcIframe").contents().find("#proxyClickId").html(clickCount);
 }
 function changeIframeHeight( ){ 
 	hcContentHeight=extraHeight+$("#hcIframe").contents().find("#hcContentDiv").height();
