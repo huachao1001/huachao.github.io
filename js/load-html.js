@@ -25,6 +25,7 @@ function queryArticle(curCategoryId,curPageNo){
 				if(!authorUrl){
 					authorUrl="";
 				}
+				
 				var authorName=object.get("authorName");
 				var tmpItem=oneItem.replace("${arcitleId}",object.id).replace("${title}",title).replace("${imgUrl}",imgUrl).replace("${descript}",descript).replace("${dateTime}",object.createdAt);
 				tmpItem=tmpItem.replace("${category}",_CATEGORY_ID_[categoryId]).replace("${clickCount}",0).replace("${authorName}",authorName).replace("${authorUrl}",authorUrl);
@@ -45,7 +46,9 @@ function queryArticleById(articleId){
 	query.get(articleId, {
 	success: function(article) { 
 	$("#articleTitle").html(article.get("title"));
-	$("#articleContent").html(article.get("content"));
+	var hcArticleMarked=HCMarkDown(article.get("content"));
+	changeIframeHtml(hcArticleMarked);
+	//$("#articleContent").html());
 	
   },
   error: function(object, error) {
