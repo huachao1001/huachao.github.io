@@ -41,6 +41,7 @@ function queryArticle(curCategoryId,curPageNo){
 }
 
 function queryArticleById(articleId){
+	
 	var Article = Bmob.Object.extend("article");
 	var query = new Bmob.Query(Article);
 	query.get(articleId, {
