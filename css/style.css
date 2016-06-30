@@ -192,7 +192,7 @@ body, input, button, textarea, select {
 	float: left;
 }
 .content {
-	margin-right: 260px;
+	margin-right: 197px;
 	margin-left: 190px;
 	padding: 10px 20px 0;
 	min-height: 800px;
@@ -918,8 +918,8 @@ textarea::-webkit-scrollbar-thumb {
 /*右侧样式开始*/
 .sidebar {
 	float: left;
-	margin-left: -260px;
-	width: 245px;
+	margin-left: -195px;
+	width: 190px;
 	position: relative;
 	padding-top: 20px;
 }
@@ -998,7 +998,7 @@ textarea::-webkit-scrollbar-thumb {
 /*搜索表单样式开始*/
 .sidebar .search {
 	position: absolute;
-	width: 245px;
+	width: 190px;
 }
 .shadow {
 	z-index: 10;

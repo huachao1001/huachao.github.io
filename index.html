@@ -22,7 +22,8 @@
 //判断浏览器是否支持HTML5
 window.onload = function() {
 	if (!window.applicationCache) {
-		window.location.href="ie.html";
+		//window.location.href="ie.html";
+		alert("您的浏览器不支持，请更换火狐或谷歌浏览器！")
 	}
 }
 var pageCount=10;
@@ -101,7 +102,7 @@ var _CATEGORY_ID_=["最新文章","Java基础","Android相关","数据结构","�
 				<div class="news-img col-xs-5 col-sm-5 col-md-4"> <a target="_blank" href=""><img src="${imgUrl}" alt=""> </a> </div>
 				<div class="news-info col-xs-7 col-sm-7 col-md-8">
 				  <dl>
-					<dt> <a href="article.html?${arcitleId}" target="_blank"> ${title} </a> </dt>
+					<dt> <a href="article.html?${arcitleId}" > ${title} </a> </dt>
 					<dd><span class="name"><a href="${authorUrl}"   rel="author">${authorName}</a></span> <span class="identity"></span> <span class="time"> ${dateTime} </span></dd>
 					<dd class="text">${descript}</dd>
 				  </dl>
@@ -130,11 +131,11 @@ var _CATEGORY_ID_=["最新文章","Java基础","Android相关","数据结构","�
       <form class="navbar-form" action="search.php" method="post">
         <div class="input-group">
 		  <div>
-			<img src="images/weixin_pay.png" style="margin-left:16px" width="200px" height="200px" alt="">
+			<img src="images/weixin_pay.png" style="margin-left:15px" width="140px" height="140px" alt="">
 		  </div>
 		  <div>
 			 
-			<img src="images/zhifubao.png" style="margin-left:16px"  width="200px" height="200px" alt="">
+			<img src="images/zhifubao.png" style="margin-top:30px;margin-left=10px" width="155px" height="155px" alt="">
 		  </div>
         	  
 		</div>

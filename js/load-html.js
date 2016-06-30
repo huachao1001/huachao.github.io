@@ -1,24 +1,5 @@
 Bmob.initialize("8bc5db9ed64cdb73292da07fb398e1a3", "2c505b1c4eaa965560bd433c9ae1639c");
-function addClickCount(articleId){
-	var ClickCount = Bmob.Object.extend("ClickCount");
-	var query = new Bmob.Query(ClickCount);
-	query.equalTo("articleId", articleId);
-	query.find({
-		success: function(results) { 
-			for (var i = 0; i < results.length; i++) {
-				var object = results[i];
-				 var clickCount=object.get("clickCount");
-				 object.set("clickCount",(parseInt(clickCount)+1)+"");
-				 object.save( ); 
-			}
-			 
-		},
-		error: function(error) {
-			 
-		}
-	});
-	
-}
+
 function updateClickCountByArtId(articleId){
 	var ClickCount = Bmob.Object.extend("ClickCount");
 	var query = new Bmob.Query(ClickCount);
@@ -27,8 +8,7 @@ function updateClickCountByArtId(articleId){
 		success: function(results) { 
 			for (var i = 0; i < results.length; i++) {
 				var object = results[i];
-				var clickCount=object.get("clickCount");
-				console.log("click Count:"+clickCount);
+				var clickCount=object.get("clickCount"); 
 				$("#click"+articleId).html(clickCount);
 			}
 			 
@@ -89,42 +69,8 @@ function queryArticle(curCategoryId,curPageNo){
 		}
 	});
 }
-function updateDetailClickCount(articleId){
-	var ClickCount = Bmob.Object.extend("ClickCount");
-	var query = new Bmob.Query(ClickCount);
-	query.equalTo("articleId", articleId);
-	query.find({
-		success: function(results) { 
-			for (var i = 0; i < results.length; i++) {
-				var object = results[i];
-				var clickCount=object.get("clickCount");  
-				updateProxyClick(clickCount);
-			}
-			 
-		},
-		error: function(error) {
-			 
-		}
-	}); 
-}
-function queryArticleById(articleId){
-	
-	var Article = Bmob.Object.extend("article");
-	var query = new Bmob.Query(Article);
-	query.get(articleId, {
-		success: function(article) { 
-			$("#articleTitle").html(article.get("title"));
-			var hcArticleMarked=HCMarkDown(article.get("content"));
-			changeIframeHtml(hcArticleMarked);
-			updateDetailCrtTime(article.createdAt);
-			updateDetailClickCount(articleId);
-			addClickCount(articleId);
-		},error: function(object, error) {
-    // ²éÑ¯Ê§°Ü
-	alert("sorry!");
-  }
-});
-} 
+
+
 
 
 function genPageBar(curPageNo,categoryId){
