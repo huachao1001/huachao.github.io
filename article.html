@@ -88,7 +88,10 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
       <div class="content-block new-content">
         <h1 class="title" style="text-align:center"><strong id="articleTitle" ></strong></h1>
         <div id="articleContent"> 
-        </div>
+			<div  id="hcLoadingGif" style="positon:relative;width:100%">
+				<img src="images/loading.gif" style="width:300px;height:300px;position:absolute;top:50%;left:50%;margin-left:-150px;margin-top:0px">
+			</div>
+		</div>
         <!--<div class="news-more" id="pagination">
         	<a href="">查看更多</a>
         </div>--> 
@@ -145,7 +148,7 @@ function changeIframeHeight(newHeight ){
 	$("#hcIframe").css("height",(newHeight)+"px");
 	 
 	$("#hcContent").css("min-height",(  newHeight)+"px");
-	
+	$("#hcLoadingGif").css("display","none");
 	//$("#hcIframe").contents().find("#hcContentDiv").bind('contentchanged', changeIframeHeight());
 }
 
