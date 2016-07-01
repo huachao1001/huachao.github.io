@@ -8150,3 +8150,4 @@
     return request._thenRunCallbacks(options);
   };
 }(this));
+Bmob.initialize("8bc5db9ed64cdb73292da07fb398e1a3", "2c505b1c4eaa965560bd433c9ae1639c");

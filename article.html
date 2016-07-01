@@ -100,6 +100,9 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
 		<iframe src=""  id="hcIframe"   style="width:100%;min-height:800px"  frameborder="no" border="0" marginwidth="0" marginheight="0"   >
 		 
 		</iframe>
+		<!-- 多说评论框 start -->
+	<div class="ds-thread" id="hcReplyFrame" style="margin-top:150px;" data-thread-key="" data-title="" data-url=""></div>
+	<!-- 多说评论框 end -->
 		</div>
     </div>
   </div>
@@ -141,14 +144,27 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
 <script src="js/bootstrap.js" type="text/javascript"></script> 
 
 <script type="text/javascript"> 
- 
- 
+var duoshuoQuery = {short_name:"huachao1001"}; 
+function loadReply(articleId,title){
+			$("#hcReplyFrame").attr("data-thread-key",articleId);
+			$("#hcReplyFrame").attr("data-title",title);
+			$("#hcReplyFrame").attr("data-url","http://huachao1001.github.io/article.html?"+articleId);
+			
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	 
+}
  
 function changeIframeHeight(newHeight ){  
 	$("#hcIframe").css("height",(newHeight)+"px");
 	 
 	$("#hcContent").css("min-height",(  newHeight)+"px");
 	$("#hcLoadingGif").css("display","none");
+
 	//$("#hcIframe").contents().find("#hcContentDiv").bind('contentchanged', changeIframeHeight());
 }
 
@@ -176,6 +192,7 @@ $(function(){
 		var articleId=curUrlSp[1];
 		//queryArticleById(articleId);
 		$("#hcIframe").attr('src',"proxy.html?"+articleId); 
+		 
 	 }
 	
 	

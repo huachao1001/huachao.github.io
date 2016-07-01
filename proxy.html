@@ -144,7 +144,7 @@ body {
 .hibot .num { color: #a5c261; }.hibot .attr { color : #4093CC} .hibot .comment { color: #bc9458; font-style: italic; }.hibot .special { color: #da4939; }.hibot .statement { color: #cc7833; }.hibot .preProc { color: #e6e1dc; }.hibot .include, .hibot .head { color: #cc7833; }.hibot .string { color: #a5c261; }.hibot .type, .hibot .keyword, .hibot .val { color: #da4939; }
 </style>
 </head>
-<body   >
+<body  id="hcBody" >
 	<div>
 		<div style="margin:0 auto;width:368px;color:#3399cc;margin-bottom:50px">
 			<span>创建时间：</span><strong id="proxyCreateAt"> </strong>
@@ -153,14 +153,16 @@ body {
 	</div>
 	<div id="hcContentDiv">
 	</div>
+	
+	
+	
 </body>
 
 <script src="js/jquery-2.js" type="text/javascript"></script> 
 <script type="text/javascript" src="js/bmob.js"></script>
 <script type="text/javascript" src="all.js?v=5"></script> 
 <script type="text/javascript">
-
-Bmob.initialize("8bc5db9ed64cdb73292da07fb398e1a3", "2c505b1c4eaa965560bd433c9ae1639c");
+ 
 
 function addClickCount(articleId){
 	var ClickCount = Bmob.Object.extend("ClickCount");
@@ -201,16 +203,20 @@ function updateDetailClickCount(articleId){
 		}
 	}); 
 }
+
+
+
 function changeIframeHtml(hcArticleMarked){
 	var codeLineCount=0;
 	$(hcArticleMarked).find("code").each(function(){
+		var className=$(this).attr("class")
 		codeLineCount+=$(this).text().split("\n").length;
 	});
 	var extraHeight=80;
 	extraHeight+=codeLineCount*17; 
 	var contentDiv=$("#hcContentDiv");
 	contentDiv.html(hcArticleMarked);
-	var newHeight=extraHeight+contentDiv.height()
+	var newHeight=extraHeight+contentDiv.height();
 	 window.parent.changeIframeHeight(newHeight);
 }
 function queryArticleById(articleId){
@@ -226,6 +232,7 @@ function queryArticleById(articleId){
 			$("#proxyCreateAt").html(article.createdAt); 
 			updateDetailClickCount(articleId);
 			addClickCount(articleId);
+			window.parent.loadReply(articleId,article.get("title"));
 		},error: function(object, error) {
     // 查询失败
 	alert("sorry!");
@@ -241,8 +248,13 @@ $(function(){
 		
 	}
 });
-</script>
 
+</script>
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+
+	</script>
+<!-- 多说公共JS代码 end -->
 
 </html>
 
