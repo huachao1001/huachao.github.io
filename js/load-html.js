@@ -57,7 +57,7 @@ function queryArticle(curCategoryId,curPageNo){
 				var authorName=object.get("authorName");
 				var tmpItem=oneItem.replace("${arcitleId}",object.id).replace("${title}",title).replace("${imgUrl}",imgUrl).replace("${descript}",descript).replace("${dateTime}",object.createdAt);
 				tmpItem=tmpItem.replace("${category}",_CATEGORY_ID_[categoryId]).replace("${authorName}",authorName).replace("${authorUrl}",authorUrl);
-				tmpItem=tmpItem.replace("${c}",categoryId).replace("${clickId}","click"+object.id);
+				tmpItem=tmpItem.replace("${c}",categoryId).replace("${clickId}","click"+object.id).replace("${imgClickToUrl}","article.html?"+object.id);
 				articleIds.push(object.id);
 				html+=tmpItem; 
 			}
