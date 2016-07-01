@@ -30,6 +30,7 @@ function queryArticle(curCategoryId,curPageNo){
 		query.equalTo("categoryId", curCategoryId);
 	}
 	query.limit(pageCount);
+	query.descending("createdAt");
 	query.skip(pageCount*(curPageNo-1));
 	var oneItem=$("#HCAricleModel").html();
 	var html="";
