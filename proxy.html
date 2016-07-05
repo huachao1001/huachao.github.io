@@ -20,10 +20,11 @@ body {
 }
 a {
     color: #0069d6;
+	text-decoration: none;
 }
 a:hover {
     color: #0050a3;
-    text-decoration: none;
+    
 }
 a img {
     border: none;
@@ -340,10 +341,13 @@ if(curUrlSp&&curUrlSp.length>1){
 //var changeHeightTimes=0;
 $("#hcContentDiv").bind('resize',function(){
 	//if(changeHeightTimes>5) return;
-	//changeHeightTimes++;
-	console.log("=="+$(this).height());
+	//changeHeightTimes++; 
     window.parent.changeIframeHeight($(this).height()+80); 
+	$("a").bind('click',function(){ 
+		window.parent.location.href=this.href; 
+	});
 });
+
 </script>
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
