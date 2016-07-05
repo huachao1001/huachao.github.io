@@ -163,12 +163,20 @@ body {
 </body>
 
 <script src="js/jquery-2.js" type="text/javascript"></script> 
+<script src="js/hc-cookie.js" type="text/javascript"></script> 
 <script type="text/javascript" src="js/bmob.js"></script>
 <script type="text/javascript" src="all.js?v=5"></script> 
 <script type="text/javascript">
  
 
 function addClickCount(articleId){
+	var isAccessed=getCookie("CK"+articleId);
+	if(isAccessed!=null){
+		return ;
+	}else{
+		setCookie("CK"+articleId,"1",5*60*1000);//5 min
+	} 
+
 	var ClickCount = Bmob.Object.extend("ClickCount");
 	var query = new Bmob.Query(ClickCount);
 	query.equalTo("articleId", articleId);
@@ -189,7 +197,7 @@ function addClickCount(articleId){
 	
 }
 
-function updateDetailClickCount(articleId){
+function updateDetailClickCount(articleId){ 
 	var ClickCount = Bmob.Object.extend("ClickCount");
 	var query = new Bmob.Query(ClickCount);
 	query.equalTo("articleId", articleId);
