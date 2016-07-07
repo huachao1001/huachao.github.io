@@ -49,10 +49,11 @@ function queryArticle(curCategoryId,curPageNo){
 				if(!authorUrl){
 					authorUrl="";
 				} 
+				/**
 				if(!imgUrl){
 					imgUrl=genImg(title);
 				} 
-				  
+				  **/
 				
 				var authorName=object.get("authorName");
 				var tmpItem=oneItem.replace("${arcitleId}",object.id).replace("${title}",title).replace("${imgUrl}",imgUrl).replace("${descript}",descript).replace("${dateTime}",object.createdAt);

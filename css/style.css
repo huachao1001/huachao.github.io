@@ -349,7 +349,7 @@ body, input, button, textarea, select {
 .news-list {
 	float: left;
 	width: 100%;
-	padding: 10px 5px;
+	padding: 10px 17px;
 	border-bottom: solid 1px #f0f0f0;
 	margin: 0px;
 	text-decoration: none;
@@ -383,10 +383,10 @@ body, input, button, textarea, select {
 	 
 	line-height: 22px;
 	font-size: 18px;
-	color: #444;
+	color: #3399cc;
 }
 .news-info dl dt a:hover {
-	color: #555;
+	color: #3399cc;
 }
 .news-info dd, .news-info span {
 	cursor: default;
