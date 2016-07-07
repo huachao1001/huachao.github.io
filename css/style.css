@@ -380,7 +380,7 @@ body, input, button, textarea, select {
 }
 .news-info dl dt a {
 	float: left;
-	width: 100%;
+	 
 	line-height: 22px;
 	font-size: 18px;
 	color: #444;
