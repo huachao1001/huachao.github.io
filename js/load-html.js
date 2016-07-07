@@ -76,6 +76,9 @@ function queryArticle(curCategoryId,curPageNo){
 function genPageBar(curPageNo,categoryId){
 	var Article = Bmob.Object.extend("article");
 	var query = new Bmob.Query(Article);
+	if(categoryId!=0){
+		query.equalTo("categoryId", categoryId);
+	}
 	query.count({
 	  success: function(count) {
 		// 查询成功，返回记录数量 
