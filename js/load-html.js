@@ -30,11 +30,12 @@ function queryArticle(curCategoryId,curPageNo){
 		query.equalTo("categoryId", curCategoryId);
 	}
 	query.limit(pageCount);
+	query.select("title", "picUrl","descript","categoryId","authorUrl","authorName");
 	query.descending("createdAt");
 	query.skip(pageCount*(curPageNo-1));
 	var oneItem=$("#HCAricleModel").html();
 	var html="";
-	// 查询所有数据
+	// 查询所有数据,由于内容字符串太长，因此这里不查询内容
 	query.find({
 		success: function(results) {
 			 
@@ -46,6 +47,7 @@ function queryArticle(curCategoryId,curPageNo){
 				var descript=object.get("descript");
 				var categoryId=object.get("categoryId");
 				var authorUrl=object.get("authorUrl");
+				var authorName=object.get("authorName");
 				if(!authorUrl){
 					authorUrl="";
 				} 
@@ -55,7 +57,7 @@ function queryArticle(curCategoryId,curPageNo){
 				} 
 				  **/
 				
-				var authorName=object.get("authorName");
+				
 				var tmpItem=oneItem.replace("${arcitleId}",object.id).replace("${title}",title).replace("${imgUrl}",imgUrl).replace("${descript}",descript).replace("${dateTime}",object.createdAt);
 				tmpItem=tmpItem.replace("${category}",_CATEGORY_ID_[categoryId]).replace("${authorName}",authorName).replace("${authorUrl}",authorUrl);
 				tmpItem=tmpItem.replace("${c}",categoryId).replace("${clickId}","click"+object.id).replace("${imgClickToUrl}","article.html?"+object.id);
