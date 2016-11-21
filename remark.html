@@ -25,6 +25,13 @@
  #ds-thread #ds-reset .ds-powered-by {
     display:none;
 }
+.ds-comment {
+	
+	font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+.ds-metal{
+	font-size:20px;
+}
  </style>
 <script type="text/javascript">
 //判断浏览器是否支持HTML5
@@ -52,8 +59,9 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
         <li><a href="index.html?c=5"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/network_logo.png"/>计算机网络</a></li>
         <li><a href="index.html?c=6"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/database_logo.png"/>数据库</a></li>
         <li><a href="index.html?c=7"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/jvm_icon.png"/>JVM</a></li>
-        <li><a href="remark.html"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/comments_logo.png"/>最新评论</a></li>
+		<li><a href="remark.html"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/comments_logo.png"/>最新评论</a></li>
 		
+        
       </ul>
       <div class="feeds"> 
 		<a class="feed feed-xlweibo" href="http://weibo.com/huacwb" target="_blank"><i></i>新浪微博</a> 
@@ -76,7 +84,7 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
 			<li><a href="index.html?c=4"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/operate_logo.png"/>操作系统</a></li>
 			<li><a href="index.html?c=5"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/network_logo.png"/>计算机网络</a></li>
 			<li><a href="index.html?c=6"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/database_logo.png"/>数据库</a></li>
-            <li><a href="remark.html"><img style="width:20px;height:20px;margin-right:5px;margin-top:-5px ;margin-left:5px " src="images/comments_logo.png"/>最新评论</a></li>
+        
 		</ul>
         
       </div>
@@ -96,23 +104,18 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
       <!--/banner-->
     
       <div class="content-block new-content">
-        <h1 class="title" style="text-align:center"><strong id="articleTitle" ></strong></h1>
+        <h1 class="title" style="text-align:center"><strong id="articleTitle" >最新评论</strong></h1>
         <div id="articleContent"> 
-			<div  id="hcLoadingGif" style="positon:relative;width:100%">
-				<img src="images/loading.gif" style="width:300px;height:300px;position:absolute;top:50%;left:50%;margin-left:-150px;margin-top:0px">
-			</div>
+			 
 		</div>
         <!--<div class="news-more" id="pagination">
         	<a href="">查看更多</a>
         </div>--> 
       </div>
 	  <div  >
-		<iframe src=""  id="hcIframe"   style="width:100%;min-height:800px"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"  >
 		 
-		</iframe>
-		<!-- 多说评论框 start -->
-	<div class="ds-thread" id="hcReplyFrame" style="margin-top:150px;margin-bottom: 150px;" data-thread-key="" data-title="" data-url=""></div>
-	<!-- 多说评论框 end -->
+		<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
+
 		</div>
     </div>
   </div>
@@ -167,30 +170,7 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
 <script type="text/javascript"> 
 
  
-
-var duoshuoQuery = {short_name:"huachao1001"}; 
-function loadReply(articleId,title){
-			$("#hcReplyFrame").attr("data-thread-key",articleId);
-			$("#hcReplyFrame").attr("data-title",title);
-			$("#hcReplyFrame").attr("data-url","http://huachao1001.github.io/article.html?"+articleId);
-			
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	 
-}
  
-function changeIframeHeight(newHeight ){  
-	$("#hcIframe").css("height",(newHeight)+"px");
-	 
-	$("#hcContent").css("min-height",(  newHeight)+"px");
-	$("#hcLoadingGif").css("display","none");
-
-	//$("#hcIframe").contents().find("#hcContentDiv").bind('contentchanged', changeIframeHeight());
-}
 
 //页面加载
 $('body').show();
@@ -214,9 +194,6 @@ $(function(){
 	 var curUrlSp=window.location.href.split("?"); 
 	 if(curUrlSp&&curUrlSp.length>1){
 		var articleId=curUrlSp[1];
-		var jinIndex=articleId.indexOf("#");
-		if(jinIndex>=0)
-			articleId=articleId.split("#")[0];
 		//queryArticleById(articleId);
 		$("#hcIframe").attr('src',"proxy.html?"+articleId); 
 		 
@@ -288,5 +265,16 @@ $(function(){
  
 </script>
 
+<!--多说js加载开始，一个页面只需要加载一次 -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"huachao1001"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
 
+</script>
 </body></html>
