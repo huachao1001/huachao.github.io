@@ -365,6 +365,7 @@ if(curUrlSp&&curUrlSp.length>1){
   }
 })(jQuery, this);
 
+var changedCdH=false;
 //var changeHeightTimes=0;
 $("#hcContentDiv").bind('resize',function(){
 	//if(changeHeightTimes>5) return;
@@ -373,6 +374,15 @@ $("#hcContentDiv").bind('resize',function(){
 	$("a").bind('click',function(){ 
 		window.parent.location.href=this.href; 
 	});
+	var codeObj=$("pre ol");
+	if(codeObj!=null&&!changedCdH){
+		codeObj.each(function changeH(index){
+			var obj=$(this);
+			obj.css("height",(obj.height()+2)+"px"); 
+			changedCdH=true;
+		});
+	}
+    	
 });
 
 </script>
