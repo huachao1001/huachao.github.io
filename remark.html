@@ -110,17 +110,19 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
       <div class="content-block new-content">
         <h1 class="title" style="text-align:center"><strong id="articleTitle" >最新评论</strong></h1>
         <div id="articleContent"> 
-			 
+			 <!-- UYAN HOT COMMENT BEGIN -->
+
 		</div>
         <!--<div class="news-more" id="pagination">
         	<a href="">查看更多</a>
         </div>--> 
       </div>
-	  <div  >
-		 
-		<ul class="ds-recent-comments" data-num-items="1000" data-show-avatars="1" data-show-time="1" data-show-admin="1" data-excerpt-length="70"></ul>
-
-		</div>
+	  
+		  
+		 <!-- UYAN NEW COMMENT BEGIN -->
+		<div id="uyan_newcmt_unit"></div>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2129015"></script> <!-- 如果已经过加载此行JS，即可不用重复加载 -->
+			<!-- UYAN NEW COMMENT END -->
     </div>
   </div>
   <!--/内容-->
@@ -163,10 +165,15 @@ var _CATEGORY_ID_=["Java","Android","数据结构","操作系统","计算机网�
    
   </aside>
   <!--/右侧>992px显示-->
-  <footer class="footer"> ©<a href="http://huachao1001.github.io">华超的技术博客   2016</a><span><a href="http://huachao1001.github.io" target="_blank"></a></span> <span style="display:none"><a href="">网站统计</a></span> </footer>
+   
+
+
+   <footer class="footer"> ©<a href="http://huachao1001.github.io">华超的技术博客   2016</a><span><a href="http://huachao1001.github.io" target="_blank"></a></span> <span style="display:none"><a href="">网站统计</a></span> </footer>
 </section>
 <div><a href="javascript:;" class="gotop" style="display:none;"></a></div>
 <!--/返回顶部--> 
+ 
+</body></html>
 <script src="js/jquery-2.js" type="text/javascript"></script> 
 <script src="js/nprogress.js" type="text/javascript"></script> 
 <script src="js/bootstrap.js" type="text/javascript"></script> 
@@ -269,18 +276,7 @@ $(function(){
  
 </script>
 
-<!--多说js加载开始，一个页面只需要加载一次 -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"huachao1001"};
-(function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = 'http://static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-})();
-
-</script>
+ 
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -290,4 +286,3 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-</body></html>

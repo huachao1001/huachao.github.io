@@ -271,6 +271,7 @@ function queryArticleById(articleId){
 	query.get(articleId, {
 		success: function(article) { 
 			 $('#articleTitle', window.parent.document).html(article.get("title"));
+			 window.parent.document.title=article.get("title");
 			var hcArticleMarked=HCMarkDown(article.get("content"));
 			changeIframeHtml(hcArticleMarked);
 			
